@@ -2,7 +2,7 @@ import functions from "@google-cloud/functions-framework";
 import { apply } from "./apply.js";
 import { parseMessage } from "./parser.js";
 
-functions.cloudEvent('entoryPoint', async cloudEvent => {
+functions.cloudEvent('entryPoint', async cloudEvent => {
   const base64Message = cloudEvent.data.message.data;
   if (!base64Message) {
     console.log('No message received!');
