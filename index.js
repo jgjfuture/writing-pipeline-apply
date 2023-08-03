@@ -1,18 +1,16 @@
 import functions from "@google-cloud/functions-framework";
-import { detect } from "./detect.js";
-import { resolve } from "./resolve.js";
-import { publishMessage, makePublishData } from "./publish.js";
-import { topicName } from "./pubsub.js";
+import { apply } from "./apply.js";
+import { parseMessage } from "./parser.js";
 
-functions.http('helloHttp', async (req, res) => {
-  const detectedItems = await detect();
-  for (const item of detectedItems) {
-    const metaId = item.id;
-    const paper = item.properties.paper;
-    const imageURL = paper.files[0].file.url;
-    console.log("Detected:", metaId);
-    await publishMessage(topicName, makePublishData(metaId, imageURL));
-    await resolve(metaId);
+functions.cloudEvent('entoryPoint', async cloudEvent => {
+  const base64Message = cloudEvent.data.message.data;
+  if (!base64Message) {
+    console.log('No message received!');
+    return;
   }
-  res.send("OK");
+  const messageJson = Buffer.from(base64Message, 'base64').toString();
+  const message = JSON.parse(messageJson);
+  const { notionPageId, generatedText } = message;
+  const children = parseMessage(generatedText);
+  await apply(notionPageId, children)
 });
