@@ -1,5 +1,4 @@
-export function parseMessage(message) {
-    const textItems = message.split('\n');
+export function parseMessage(textItems) {
     const blocks = textItems.map(textItem => {
         if(textItem.startsWith('- [ ] ')) {
             return makeToDoItemBlock(textItem.substring(6));
@@ -10,6 +9,13 @@ export function parseMessage(message) {
         }
     });
     return blocks;
+}
+
+function preProcessMessage(message) {
+    const textItems = message.split('\n');
+    // delete trailing space from each line
+    const trimmedTextItems = textItems.map(textItem => textItem.trim());
+    return trimmedTextItems;
 }
 
 function makeBulletListItemBlock(text) {
