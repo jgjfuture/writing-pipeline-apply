@@ -1,4 +1,5 @@
-export function parseMessage(textItems) {
+export function parseMessage(message) {
+    const textItems = preProcessMessage(message);
     const blocks = textItems.map(textItem => {
         if(textItem.startsWith('- [ ] ')) {
             return makeToDoItemBlock(textItem.substring(6));
