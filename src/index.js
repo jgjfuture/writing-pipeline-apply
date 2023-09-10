@@ -12,5 +12,5 @@ functions.cloudEvent('entryPoint', async cloudEvent => {
   const message = JSON.parse(messageJson);
   const { notionPageId, generatedText, generatedTitle, generatedComment } = message;
   const children = parseMessage(generatedText);
-  await apply(notionPageId, generatedTitle, generatedComment, children)
+  await apply(notionPageId, generatedTitle, children, generatedComment)
 });
