@@ -24,11 +24,10 @@ export async function apply(id, title, children, comment) {
         parent: {
             page_id: id
         },
-        text: [
+        "rich_text": [
             {
-                type: "text",
-                text: {
-                    content: comment
+                "text": {
+                "content": comment
                 }
             }
         ]
