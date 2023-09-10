@@ -1,0 +1,1 @@
+[![Deploy to Google Cloud Functions](https://github.com/jgjfuture/writing-pipeline-apply/actions/workflows/deploy.yml/badge.svg)](https://github.com/jgjfuture/writing-pipeline-apply/actions/workflows/deploy.yml)
