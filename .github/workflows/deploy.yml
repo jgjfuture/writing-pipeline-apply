@@ -7,7 +7,6 @@ on:
             - 'src/**'
             - .github/workflows/deploy.yml
 
-
 jobs:
     Deploy:
         permissions:
