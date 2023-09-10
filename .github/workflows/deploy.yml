@@ -34,6 +34,7 @@ jobs:
                 --entry-point entryPoint \
                 --region ${{ secrets.REGION }} \
                 --source src \
+                --set-env-vars ${{ secrets.FN_ENV }} \
                 --set-secrets ${{ secrets.FN_SECRET_ENV }} \
                 --max-instances 1 \
                 --trigger-topic '${{ secrets.EVENT_TRIGGER_RESOURCE }}' \
