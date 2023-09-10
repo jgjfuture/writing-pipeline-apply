@@ -10,7 +10,7 @@ functions.cloudEvent('entryPoint', async cloudEvent => {
   }
   const messageJson = Buffer.from(base64Message, 'base64').toString();
   const message = JSON.parse(messageJson);
-  const { notionPageId, generatedText } = message;
+  const { notionPageId, generatedText, generatedTitle, generatedComment } = message;
   const children = parseMessage(generatedText);
-  await apply(notionPageId, children)
+  await apply(notionPageId, generatedTitle, generatedComment, children)
 });
